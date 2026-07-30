@@ -11,7 +11,13 @@ import {
   ChevronRight,
   Quote,
   CheckCircle,
-  Heart, // <-- new icon for the value props
+  Heart,
+  Brain, // new
+  Briefcase, // new
+  CalendarDays, // new
+  MessageSquare, // new
+  Rocket, // new
+  ShieldCheck, // new
 } from "lucide-react";
 
 export default function Landing() {
@@ -107,34 +113,68 @@ export default function Landing() {
     },
   ];
 
+  // ---- UPDATED FEATURES ARRAY ----
   const features = [
     {
-      title: "Alumni Directory",
+      title: "AI Career Assistant",
       description:
-        "Find and connect with alumni based on industry, location, or graduation year.",
+        "Build ATS-friendly resumes, identify skill gaps, receive career roadmaps, and prepare for interviews with AI.",
+      icon: Brain,
+      tags: ["AI", "Resume", "ATS"],
+    },
+    {
+      title: "Smart Alumni Network",
+      description:
+        "Discover verified alumni by company, city, department, graduation year, or industry and build meaningful connections.",
       icon: Users,
+      tags: ["Alumni", "Network", "Verified"],
     },
     {
-      title: "University Network",
+      title: "Jobs & Referral Hub",
       description:
-        "Your university's private hub for events, news, and community discussions.",
-      icon: Building2,
+        "Explore internships, full-time jobs, startup opportunities, and request referrals directly from alumni.",
+      icon: Briefcase,
+      tags: ["Jobs", "Referrals", "Internships"],
     },
     {
-      title: "Global Reach",
+      title: "Mentorship Platform",
       description:
-        "Connect across borders with alumni chapters in 120+ countries worldwide.",
-      icon: Globe,
+        "Book one-on-one mentorship sessions, ask career questions, and learn directly from experienced professionals.",
+      icon: GraduationCap,
+      tags: ["Mentorship", "1:1", "Career"],
     },
     {
-      title: "Career Growth",
+      title: "Community & Social Feed",
       description:
-        "Access job boards, mentorship programs, and exclusive career resources.",
-      icon: Star,
+        "Share achievements, participate in discussions, publish updates, and connect with your university community.",
+      icon: MessageSquare,
+      tags: ["Community", "Feed", "Engage"],
+    },
+    {
+      title: "Events & Networking",
+      description:
+        "Join webinars, hackathons, alumni meets, workshops, and networking events happening across campuses.",
+      icon: CalendarDays,
+      tags: ["Events", "Webinars", "Hackathons"],
+    },
+    {
+      title: "Startup & Innovation Hub",
+      description:
+        "Find co-founders, recruit interns, collaborate on projects, and connect with alumni entrepreneurs.",
+      icon: Rocket,
+      tags: ["Startup", "Co-founder", "Funding"],
+    },
+    {
+      title: "Verified Professional Profiles",
+      description:
+        "Verified students, alumni, mentors, and recruiters ensure trusted networking and authentic career opportunities.",
+      icon: ShieldCheck,
+      tags: ["Verified", "Trust", "Secure"],
     },
   ];
+  // ---------------------------------------------------------
 
-  // ---- NEW: Value propositions for "Why LegacySphere" ----
+  // ---- Value propositions ----
   const valueProps = [
     {
       icon: Users,
@@ -194,7 +234,7 @@ export default function Landing() {
     }, interval);
   };
 
-  // Scroll handler for navbar and stats counter
+  // Scroll handler
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
@@ -228,7 +268,7 @@ export default function Landing() {
     return () => clearInterval(timer);
   }, []);
 
-  // Smooth scroll to features section when hash is #features
+  // Smooth scroll to features
   useEffect(() => {
     if (location.hash === "#features") {
       const element = document.getElementById("features");
@@ -430,7 +470,7 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* ===== NEW: WHY LEGACYSPHERE ===== */}
+      {/* ===== WHY LEGACYSPHERE ===== */}
       <section className="py-20 px-6 bg-white">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
@@ -463,37 +503,78 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* ===== FEATURES SECTION ===== */}
+      {/* ===== FEATURES SECTION (UPDATED) ===== */}
       <section id="features" className="py-20 px-6 bg-gray-50">
         <div className="max-w-7xl mx-auto">
+          {/* Category Pill */}
+          <div className="flex justify-center mb-6">
+            <span className="inline-flex items-center gap-2 px-4 py-1.5 bg-gray-900/5 text-gray-700 text-xs font-medium rounded-full border border-gray-200/60">
+              <span className="w-1.5 h-1.5 bg-gray-400 rounded-full" />
+              PLATFORM FEATURES
+            </span>
+          </div>
+
           <div className="text-center mb-16">
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900">
-              Everything you need
+              Powerful Features for
+              <br />
+              Students, Alumni & Universities
             </h2>
-            <p className="text-gray-500 mt-4 max-w-md mx-auto">
-              Tools and connections that help you thrive in your professional
-              journey.
+            <p className="text-gray-500 mt-4 max-w-2xl mx-auto">
+              Everything you need to network, learn, mentor, recruit, and grow
+              your career—all in one AI-powered platform.
             </p>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid sm:grid-cols-2 xl:grid-cols-4 gap-8">
             {features.map((feature, index) => (
               <div
                 key={index}
-                className="group p-8 bg-white border border-gray-100 rounded-2xl hover:border-gray-200 hover:shadow-sm transition-all"
+                className="group relative bg-white border border-gray-100 rounded-2xl p-8 transition-all duration-300 hover:-translate-y-2 hover:border-black hover:shadow-xl"
               >
-                <div className="w-12 h-12 bg-gray-50 rounded-xl flex items-center justify-center mb-5 group-hover:bg-gray-900 transition-colors">
+                {/* Icon with rotation on hover */}
+                <div className="w-12 h-12 bg-gray-50 rounded-xl flex items-center justify-center mb-5 group-hover:bg-gray-900 transition-colors duration-300 group-hover:rotate-6">
                   <feature.icon
                     size={22}
-                    className="text-gray-600 group-hover:text-white transition-colors"
+                    className="text-gray-600 group-hover:text-white transition-colors duration-300"
                   />
                 </div>
+
+                {/* Title */}
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">
                   {feature.title}
                 </h3>
+
+                {/* Tags */}
+                <div className="flex flex-wrap gap-1.5 mb-3">
+                  {feature.tags.map((tag, i) => (
+                    <span
+                      key={i}
+                      className="px-2 py-0.5 bg-gray-100 text-gray-600 text-[10px] font-medium rounded-full"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+
+                {/* Description */}
                 <p className="text-sm text-gray-500 leading-relaxed">
                   {feature.description}
                 </p>
+
+                {/* "Learn More" link */}
+                <div className="mt-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <Link
+                    to="#"
+                    className="inline-flex items-center gap-1 text-sm font-medium text-gray-900 hover:text-gray-700"
+                  >
+                    Learn More
+                    <ArrowRight
+                      size={16}
+                      className="group-hover:translate-x-1 transition-transform"
+                    />
+                  </Link>
+                </div>
               </div>
             ))}
           </div>
