@@ -10,6 +10,8 @@ import Messages from "./pages/Messages";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Help from "./pages/Help";
 import Contact from "./pages/Contact";
+import Privacy from "./pages/Privacy";
+import Terms from "./pages/Terms";
 
 
 
@@ -22,6 +24,8 @@ function App() {
       <Route path="/register" element={<Register />} />
       <Route path="/help" element={<Help />} />
       <Route path="/contact" element={<Contact />} />
+      <Route path="/privacy" element={<Privacy />} />
+      <Route path="/terms" element={<Terms />} />
 
       <Route
         path="/home"

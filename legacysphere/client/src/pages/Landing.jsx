@@ -251,6 +251,12 @@ export default function Landing() {
           {/* New navigation links */}
           <div className="hidden md:flex items-center gap-6 text-sm font-medium">
             <Link
+              to="/landing#features"
+              className="text-gray-600 hover:text-gray-900 transition-colors relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-gray-900 after:transition-all hover:after:w-full"
+            >
+              Services
+            </Link>
+            <Link
               to="/help"
               className="text-gray-600 hover:text-gray-900 transition-colors relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-gray-900 after:transition-all hover:after:w-full"
             >
@@ -263,10 +269,16 @@ export default function Landing() {
               Contact
             </Link>
             <Link
-              to="/landing#features"
+              to="/terms"
               className="text-gray-600 hover:text-gray-900 transition-colors relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-gray-900 after:transition-all hover:after:w-full"
             >
-              Services
+              Terms & Conditions
+            </Link>
+            <Link
+              to="/privacy"
+              className="text-gray-600 hover:text-gray-900 transition-colors relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-gray-900 after:transition-all hover:after:w-full"
+            >
+              Privacy & Policy
             </Link>
           </div>
 
@@ -293,12 +305,12 @@ export default function Landing() {
         <div className="max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div>
-              <h1 className="text-5xl sm:text-6xl lg:text-6xl font-bold text-gray-900 leading-[1.1] tracking-tight">
-                Interact
+              <h1 className="text-5xl sm:text-5xl lg:text-6xl font-bold text-gray-900 leading-[1.1] tracking-tight">
+                Meaningful Connections
                 <br />
-                <span className="text-gray-400">Connect</span>
+                <span className="text-gray-400">Limitless</span>
                 <br />
-                Grow...
+                Growth...
               </h1>
 
               <p className="text-lg text-gray-500 mt-8 leading-relaxed max-w-lg">
@@ -441,7 +453,7 @@ export default function Landing() {
             loop
             playsInline
             className="w-full h-full object-cover"
-            src="https://youtu.be/D89Dgg32yLk?si=aJQ6Ygyi4sXLwy53"
+            src="https://youtu.be/8LSt8_11wbQ"
           />
           <div className="absolute inset-0 bg-black/40" />
         </div>
