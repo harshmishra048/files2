@@ -26,11 +26,9 @@ export const getPostById = async (postId) => {
 // Create new post (supports text and/or media)
 export const createPost = async (formData) => {
   try {
-    const response = await api.post("/posts", formData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    });
+    const response = await api.post("/posts", formData);
+    // Do NOT set Content-Type manually — axios/browser sets it
+    // automatically with the correct multipart boundary.
     return response.data;
   } catch (error) {
     throw error.response?.data || error;

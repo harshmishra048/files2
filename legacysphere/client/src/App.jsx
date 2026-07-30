@@ -9,6 +9,7 @@ import Profile from "./pages/Profile";
 import Messages from "./pages/Messages";
 import ProtectedRoute from "./components/ProtectedRoute";
 
+
 function App() {
   return (
     <Routes>

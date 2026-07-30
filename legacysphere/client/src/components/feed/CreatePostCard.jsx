@@ -1,5 +1,5 @@
 import { useState, useContext } from "react";
-import { Image, Video, FileText, X, Loader2 } from "lucide-react";
+import { Image, Video, FileText, X, } from "lucide-react";
 import { AuthContext } from "../../context/AuthContext";
 import { createPost } from "../../services/postService";
 import Avatar from "../Avatar";

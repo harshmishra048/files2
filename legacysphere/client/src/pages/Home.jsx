@@ -1,6 +1,6 @@
 import { useState, useContext, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { LogOut, Moon, Sun, MessageSquare } from "lucide-react";
+import { LogOut, Moon, Sun, MessageSquare, User as UserIcon } from "lucide-react";
 import { AuthContext } from "../context/AuthContext";
 import CreatePostCard from "../components/feed/CreatePostCard";
 import FeedList from "../components/feed/FeedList";
@@ -11,7 +11,7 @@ export default function Home() {
   const { user, logout } = useContext(AuthContext);
   const navigate = useNavigate();
   const [newPost, setNewPost] = useState(null);
-  
+
   // Initialize dark mode from localStorage or system preference
   const [darkMode, setDarkMode] = useState(() => {
     const saved = localStorage.getItem('darkMode');
@@ -83,6 +83,15 @@ export default function Home() {
                 <MessageSquare size={20} />
               </Link>
 
+              {/* Profile */}
+              <Link
+                to="/profile"
+                className="p-2 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors"
+                title="Profile"
+              >
+                <UserIcon size={20} />
+              </Link>
+
               {/* User Menu */}
               <div className="flex items-center gap-2">
                 <Avatar
@@ -110,14 +119,14 @@ export default function Home() {
           {/* Left Sidebar - User Profile (Hidden on mobile) */}
           <aside className="hidden lg:block lg:col-span-3">
             <div className="bg-white dark:bg-gray-900 rounded-lg shadow-sm border border-gray-200 dark:border-gray-800 p-6 sticky top-24">
-              <div className="flex flex-col items-center text-center">
+              <Link to="/profile" className="flex flex-col items-center text-center group">
                 <Avatar
                   src={user?.avatar}
                   alt={user?.fullName}
                   size="xl"
                   className="mb-4"
                 />
-                <h3 className="font-semibold text-lg text-gray-900 dark:text-white">
+                <h3 className="font-semibold text-lg text-gray-900 dark:text-white group-hover:underline">
                   {user?.fullName}
                 </h3>
                 <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
@@ -136,7 +145,7 @@ export default function Home() {
                     {user?.bio}
                   </p>
                 )}
-              </div>
+              </Link>
 
               <div className="mt-6 pt-6 border-t border-gray-200 dark:border-gray-800">
                 <div className="space-y-2 text-sm">

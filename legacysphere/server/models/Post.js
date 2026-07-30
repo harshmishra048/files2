@@ -75,7 +75,7 @@ const postSchema = new mongoose.Schema(
     timestamps: true,
     toJSON: { virtuals: true },
     toObject: { virtuals: true },
-  }
+  },
 );
 
 // Virtual for like count
@@ -100,11 +100,13 @@ postSchema.index({ visibility: 1 });
 postSchema.index({ sharedFrom: 1 });
 
 // Validation: ensure at least content or media exists
-postSchema.pre("validate", function (next) {
-  if (!this.content && (!this.media || this.media.length === 0) && !this.sharedFrom) {
-    next(new Error("Post must have either content or media"));
-  } else {
-    next();
+postSchema.pre("validate", function () {
+  if (
+    !this.content &&
+    (!this.media || this.media.length === 0) &&
+    !this.sharedFrom
+  ) {
+    throw new Error("Post must have either content or media");
   }
 });
 
