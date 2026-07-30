@@ -78,36 +78,11 @@ export default function Login() {
           {/* Middle Section - Quote & Faces */}
           <div className="space-y-8">
             {/* Alumni Faces */}
-            <div className="flex items-center gap-3">
-              <div className="flex -space-x-3">
-                <img
-                  src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face"
-                  alt="Alumni"
-                  className="w-12 h-12 rounded-full border-2 border-white/30 object-cover"
-                />
-                <img
-                  src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop&crop=face"
-                  alt="Alumni"
-                  className="w-12 h-12 rounded-full border-2 border-white/30 object-cover"
-                />
-                <img
-                  src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face"
-                  alt="Alumni"
-                  className="w-12 h-12 rounded-full border-2 border-white/30 object-cover"
-                />
-                <div className="w-12 h-12 rounded-full border-2 border-white/30 bg-white/10 flex items-center justify-center">
-                  <span className="text-white text-sm font-semibold">10K+</span>
-                </div>
-              </div>
-              <span className="text-sm text-gray-200 font-medium ml-2">
-                Join 10,000+ alumni
-              </span>
-            </div>
 
             {/* Main Quote */}
             <blockquote className="text-white">
               <p className="text-3xl xl:text-4xl font-semibold leading-tight">
-                "LegacySphere helped me reconnect with classmates and discover
+                "LegacySphere helps us to  reconnect with classmates and discover
                 amazing opportunities."
               </p>
             </blockquote>
@@ -116,7 +91,7 @@ export default function Login() {
           {/* Bottom Section - Stats */}
           <div className="flex gap-12">
             <div>
-              <div className="text-3xl font-bold text-white">500+</div>
+              <div className="text-3xl font-bold text-white">100+</div>
               <div className="text-sm text-gray-300">Universities</div>
             </div>
             <div>
@@ -177,7 +152,7 @@ export default function Login() {
                   name="email"
                   value={form.email}
                   onChange={handleChange}
-                  placeholder="alumni@university.edu"
+                  placeholder="Enter your email"
                   required
                   className="w-full pl-11 pr-4 py-3 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg focus:border-gray-900 dark:focus:border-white focus:ring-1 focus:ring-gray-900 dark:focus:ring-white outline-none transition-all text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
                 />

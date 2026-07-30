@@ -81,33 +81,7 @@ export default function Register() {
           </div>
 
           {/* Middle Section - Value Proposition */}
-          <div className="space-y-8">
-            {/* Community Faces */}
-            <div className="flex items-center gap-3">
-              <div className="flex -space-x-3">
-                <img
-                  src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?w=150&h=150&fit=crop&crop=face"
-                  alt="Member"
-                  className="w-12 h-12 rounded-full border-2 border-white/30 object-cover"
-                />
-                <img
-                  src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=150&h=150&fit=crop&crop=face"
-                  alt="Member"
-                  className="w-12 h-12 rounded-full border-2 border-white/30 object-cover"
-                />
-                <img
-                  src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=150&h=150&fit=crop&crop=face"
-                  alt="Member"
-                  className="w-12 h-12 rounded-full border-2 border-white/30 object-cover"
-                />
-                <div className="w-12 h-12 rounded-full border-2 border-white/30 bg-white/10 flex items-center justify-center">
-                  <span className="text-white text-sm font-semibold">+</span>
-                </div>
-              </div>
-              <span className="text-sm text-gray-200 font-medium ml-2">
-                Growing community of 10,000+
-              </span>
-            </div>
+          <div className="space-y-6">
 
             {/* Main Message */}
             <blockquote className="text-white">
@@ -115,21 +89,6 @@ export default function Register() {
                 "Joining LegacySphere opened doors to mentorship, jobs, and
                 lifelong connections I never expected."
               </p>
-              <footer className="mt-6 flex items-center gap-3">
-                <img
-                  src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face"
-                  alt="Marcus Johnson"
-                  className="w-10 h-10 rounded-full object-cover"
-                />
-                <div>
-                  <div className="text-sm font-medium text-white">
-                    Marcus Johnson
-                  </div>
-                  <div className="text-sm text-gray-300">
-                    Alumni, MIT • Joined 2023
-                  </div>
-                </div>
-              </footer>
             </blockquote>
           </div>
 
@@ -207,7 +166,7 @@ export default function Register() {
                   name="fullName"
                   value={form.fullName}
                   onChange={handleChange}
-                  placeholder="John Doe"
+                  placeholder="enter your name"
                   required
                   className="w-full pl-11 pr-4 py-3 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg focus:border-gray-900 dark:focus:border-white focus:ring-1 focus:ring-gray-900 dark:focus:ring-white outline-none transition-all text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
                 />
@@ -229,7 +188,7 @@ export default function Register() {
                   name="email"
                   value={form.email}
                   onChange={handleChange}
-                  placeholder="alumni@university.edu"
+                  placeholder="enter your email"
                   required
                   className="w-full pl-11 pr-4 py-3 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg focus:border-gray-900 dark:focus:border-white focus:ring-1 focus:ring-gray-900 dark:focus:ring-white outline-none transition-all text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
                 />

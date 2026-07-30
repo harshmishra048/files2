@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom"; // added useLocation for hash scroll
 import {
   GraduationCap,
   ArrowRight,
@@ -25,18 +25,19 @@ export default function Landing() {
   });
   const statsRef = useRef(null);
   const countersStarted = useRef(false);
+  const location = useLocation(); // for hash-based scrolling
 
   const heroImages = [
     {
-      url: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=800&h=600&fit=crop",
+      url: "https://res.cloudinary.com/durp5jwgn/image/upload/v1785339747/ChatGPT_Image_Jul_29_2026_09_12_07_PM_coziix.png",
       alt: "Students collaborating",
     },
     {
-      url: "https://images.unsplash.com/photo-1477281765962-ef34e8bb0967?q=80&w=733&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      url: "https://res.cloudinary.com/durp5jwgn/image/upload/v1785339551/ChatGPT_Image_Jul_29_2026_09_03_59_PM_lpfnhk.png",
       alt: "Graduation ceremony",
     },
     {
-      url: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=800&h=600&fit=crop",
+      url: "https://res.cloudinary.com/durp5jwgn/image/upload/v1785339551/ChatGPT_Image_Jul_29_2026_09_07_43_PM_ke8ifj.png",
       alt: "Networking event",
     },
   ];
@@ -76,7 +77,7 @@ export default function Landing() {
     {
       quote:
         "LegacySphere helped me land my dream job through alumni connections I never knew existed.",
-      name: "Priya Sharma",
+      name: "Priya Saket",
       role: "Software Engineer",
       company: "Google",
       university: "IIT Delhi '21",
@@ -86,22 +87,22 @@ export default function Landing() {
     {
       quote:
         "As faculty, this platform makes it effortless to stay connected with students long after graduation.",
-      name: "Dr. Rajesh Kumar",
-      role: "Professor",
+      name: "Dr. Akhilesh A. Waoo",
+      role: "Dean of Faculty",
       company: "Computer Science",
-      university: "BITS Pilani",
+      university: "A.K.S University",
       image:
-        "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face",
+        "https://media.licdn.com/dms/image/v2/D5603AQHurTzXrnr1uw/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1727707028196?e=1787184000&v=beta&t=aLy8ziUw9esxiT89np1dwhF91DKazepRlQwy3qY8WWk",
     },
     {
       quote:
         "The mentorship opportunities here are incredible. I've grown so much in just one year.",
-      name: "Alex Chen",
+      name: "Devesh Pathak",
       role: "Product Designer",
-      company: "Stripe",
-      university: "NUS '20",
+      company: "SiyaCreatives",
+      university: "A.K.S University",
       image:
-        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
+        "https://media.licdn.com/dms/image/v2/D4E35AQHlkATF8J9m8w/profile-framedphoto-shrink_800_800/B4EZstxm9EGUAk-/0/1765999538385?e=1785992400&v=beta&t=gn2Y0Y4VXj_nSGGmqnFLw4VFzQDY5Zmz1ho3YLu08iI",
     },
   ];
 
@@ -163,11 +164,11 @@ export default function Landing() {
     }, interval);
   };
 
+  // Scroll handler for navbar and stats counter
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
 
-      // Start counters when stats section is visible
       if (statsRef.current && !countersStarted.current) {
         const rect = statsRef.current.getBoundingClientRect();
         if (rect.top < window.innerHeight - 100) {
@@ -197,6 +198,18 @@ export default function Landing() {
     return () => clearInterval(timer);
   }, []);
 
+  // Smooth scroll to features section when hash is #features
+  useEffect(() => {
+    if (location.hash === "#features") {
+      const element = document.getElementById("features");
+      if (element) {
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: "smooth" });
+        }, 100);
+      }
+    }
+  }, [location]);
+
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % testimonials.length);
   };
@@ -216,7 +229,7 @@ export default function Landing() {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Navbar */}
+      {/* ===== UPDATED NAVBAR ===== */}
       <nav
         className={`fixed top-0 w-full z-50 transition-all duration-300 ${
           isScrolled
@@ -225,6 +238,7 @@ export default function Landing() {
         }`}
       >
         <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+          {/* Logo */}
           <Link to="/" className="flex items-center gap-2.5 group">
             <div className="p-2 bg-gray-900 rounded-lg group-hover:bg-gray-800 transition-colors">
               <GraduationCap className="text-white" size={20} />
@@ -234,6 +248,29 @@ export default function Landing() {
             </span>
           </Link>
 
+          {/* New navigation links */}
+          <div className="hidden md:flex items-center gap-6 text-sm font-medium">
+            <Link
+              to="/help"
+              className="text-gray-600 hover:text-gray-900 transition-colors relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-gray-900 after:transition-all hover:after:w-full"
+            >
+              Help & Support
+            </Link>
+            <Link
+              to="/contact"
+              className="text-gray-600 hover:text-gray-900 transition-colors relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-gray-900 after:transition-all hover:after:w-full"
+            >
+              Contact
+            </Link>
+            <Link
+              to="/landing#features"
+              className="text-gray-600 hover:text-gray-900 transition-colors relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-gray-900 after:transition-all hover:after:w-full"
+            >
+              Services
+            </Link>
+          </div>
+
+          {/* Auth buttons (unchanged) */}
           <div className="flex items-center gap-6">
             <Link
               to="/login"
@@ -251,31 +288,17 @@ export default function Landing() {
         </div>
       </nav>
 
-      {/* Hero Section */}
+      {/* Hero Section (unchanged) */}
       <section className="pt-32 pb-20 px-6">
         <div className="max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div>
-              <div className="flex items-center gap-3 mb-8">
-                <div className="flex -space-x-2">
-                  {[1, 2, 3].map((i) => (
-                    <div
-                      key={i}
-                      className="w-8 h-8 rounded-full bg-gray-200 border-2 border-white"
-                    ></div>
-                  ))}
-                </div>
-                <span className="text-sm text-gray-600 font-medium">
-                  Trusted by 200+ universities
-                </span>
-              </div>
-
-              <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-gray-900 leading-[1.1] tracking-tight">
-                Your alumni
+              <h1 className="text-5xl sm:text-6xl lg:text-6xl font-bold text-gray-900 leading-[1.1] tracking-tight">
+                Interact
                 <br />
-                <span className="text-gray-400">network,</span>
+                <span className="text-gray-400">Connect</span>
                 <br />
-                reimagined.
+                Grow...
               </h1>
 
               <p className="text-lg text-gray-500 mt-8 leading-relaxed max-w-lg">
@@ -346,29 +369,12 @@ export default function Landing() {
                   ))}
                 </div>
               </div>
-
-              {/* Floating card */}
-              <div className="absolute -bottom-6 -left-6 bg-white p-4 rounded-xl shadow-lg border border-gray-100">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center">
-                    <div className="w-2 h-2 bg-white rounded-full animate-pulse"></div>
-                  </div>
-                  <div>
-                    <div className="text-sm font-semibold text-gray-900">
-                      1,200+ online now
-                    </div>
-                    <div className="text-xs text-gray-500">
-                      from 45 universities
-                    </div>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Stats Section with Animated Counters */}
+      {/* Stats Section with Animated Counters (unchanged) */}
       <section ref={statsRef} className="py-20 px-6 bg-gray-50">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
@@ -388,8 +394,8 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* Features Grid */}
-      <section className="py-20 px-6">
+      {/* ===== FEATURES SECTION WITH ID ===== */}
+      <section id="features" className="py-20 px-6">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900">
@@ -425,11 +431,25 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* Testimonials Carousel */}
-      <section className="py-20 px-6 bg-gray-50">
-        <div className="max-w-4xl mx-auto">
+      {/* Testimonials Carousel (unchanged) */}
+      <section className="relative py-20 px-6 bg-gray-50 overflow-hidden">
+        {/* Background Video */}
+        <div className="absolute inset-0 z-0">
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="w-full h-full object-cover"
+            src="https://youtu.be/D89Dgg32yLk?si=aJQ6Ygyi4sXLwy53"
+          />
+          <div className="absolute inset-0 bg-black/40" />
+        </div>
+
+        {/* Content - keep it above the video */}
+        <div className="relative z-10 max-w-4xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900">
+            <h2 className="text-3xl sm:text-4xl font-bold text-white">
               What our community says
             </h2>
           </div>
@@ -442,7 +462,7 @@ export default function Landing() {
               >
                 {testimonials.map((testimonial, index) => (
                   <div key={index} className="w-full flex-shrink-0 px-4">
-                    <div className="bg-white border border-gray-100 rounded-2xl p-8 md:p-12">
+                    <div className="bg-white/90 backdrop-blur-sm border border-white/20 rounded-2xl p-8 md:p-12">
                       <Quote size={32} className="text-gray-200 mb-6" />
                       <p className="text-xl text-gray-700 leading-relaxed mb-8">
                         "{testimonial.quote}"
@@ -472,13 +492,13 @@ export default function Landing() {
             {/* Navigation Buttons */}
             <button
               onClick={prevSlide}
-              className="absolute top-1/2 -left-4 -translate-y-1/2 w-10 h-10 bg-white border border-gray-200 rounded-full flex items-center justify-center hover:bg-gray-50 transition-colors shadow-sm"
+              className="absolute top-1/2 -left-4 -translate-y-1/2 w-10 h-10 bg-white border border-gray-200 rounded-full flex items-center justify-center hover:bg-gray-50 transition-colors shadow-sm z-20"
             >
               <ChevronLeft size={20} className="text-gray-600" />
             </button>
             <button
               onClick={nextSlide}
-              className="absolute top-1/2 -right-4 -translate-y-1/2 w-10 h-10 bg-white border border-gray-200 rounded-full flex items-center justify-center hover:bg-gray-50 transition-colors shadow-sm"
+              className="absolute top-1/2 -right-4 -translate-y-1/2 w-10 h-10 bg-white border border-gray-200 rounded-full flex items-center justify-center hover:bg-gray-50 transition-colors shadow-sm z-20"
             >
               <ChevronRight size={20} className="text-gray-600" />
             </button>
@@ -490,7 +510,7 @@ export default function Landing() {
                   key={index}
                   onClick={() => setCurrentSlide(index)}
                   className={`w-2 h-2 rounded-full transition-all ${
-                    currentSlide === index ? "bg-gray-900 w-6" : "bg-gray-300"
+                    currentSlide === index ? "bg-white w-6" : "bg-white/50"
                   }`}
                 ></button>
               ))}
@@ -499,7 +519,7 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* CTA Section */}
+      {/* CTA Section (unchanged) */}
       <section className="py-20 px-6">
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
@@ -521,7 +541,7 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* Footer */}
+      {/* Footer (unchanged) */}
       <footer className="border-t border-gray-100 py-8 px-6">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
           <div className="flex items-center gap-2 text-gray-500 text-sm">
