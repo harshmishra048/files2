@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { Link, useLocation } from "react-router-dom"; // added useLocation for hash scroll
+import { Link, useLocation } from "react-router-dom";
 import {
   GraduationCap,
   ArrowRight,
@@ -11,6 +11,7 @@ import {
   ChevronRight,
   Quote,
   CheckCircle,
+  Heart, // <-- new icon for the value props
 } from "lucide-react";
 
 export default function Landing() {
@@ -25,7 +26,7 @@ export default function Landing() {
   });
   const statsRef = useRef(null);
   const countersStarted = useRef(false);
-  const location = useLocation(); // for hash-based scrolling
+  const location = useLocation();
 
   const heroImages = [
     {
@@ -133,6 +134,35 @@ export default function Landing() {
     },
   ];
 
+  // ---- NEW: Value propositions for "Why LegacySphere" ----
+  const valueProps = [
+    {
+      icon: Users,
+      title: "Authentic Network",
+      description:
+        "Real alumni with verified profiles, built on trust and shared experience.",
+    },
+    {
+      icon: Building2,
+      title: "University‑Centric",
+      description:
+        "Each institution has its own private hub for tailored connections.",
+    },
+    {
+      icon: Globe,
+      title: "Global Reach",
+      description:
+        "Connect across 120+ countries – your network knows no borders.",
+    },
+    {
+      icon: Heart,
+      title: "Community First",
+      description:
+        "We prioritise meaningful engagement over passive scrolling.",
+    },
+  ];
+  // ---------------------------------------------------------
+
   // Counter animation
   const animateCounters = () => {
     const duration = 2000;
@@ -229,7 +259,7 @@ export default function Landing() {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* ===== UPDATED NAVBAR ===== */}
+      {/* ===== NAVBAR ===== */}
       <nav
         className={`fixed top-0 w-full z-50 transition-all duration-300 ${
           isScrolled
@@ -238,7 +268,6 @@ export default function Landing() {
         }`}
       >
         <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-          {/* Logo */}
           <Link to="/" className="flex items-center gap-2.5 group">
             <div className="p-2 bg-gray-900 rounded-lg group-hover:bg-gray-800 transition-colors">
               <GraduationCap className="text-white" size={20} />
@@ -248,7 +277,6 @@ export default function Landing() {
             </span>
           </Link>
 
-          {/* New navigation links */}
           <div className="hidden md:flex items-center gap-6 text-sm font-medium">
             <Link
               to="/landing#features"
@@ -282,7 +310,6 @@ export default function Landing() {
             </Link>
           </div>
 
-          {/* Auth buttons (unchanged) */}
           <div className="flex items-center gap-6">
             <Link
               to="/login"
@@ -300,7 +327,7 @@ export default function Landing() {
         </div>
       </nav>
 
-      {/* Hero Section (unchanged) */}
+      {/* ===== HERO SECTION ===== */}
       <section className="pt-32 pb-20 px-6">
         <div className="max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
@@ -337,7 +364,6 @@ export default function Landing() {
                 </Link>
               </div>
 
-              {/* Quick Stats */}
               <div className="flex items-center gap-6 mt-12 pt-8 border-t border-gray-100">
                 <div className="flex items-center gap-2 text-sm text-gray-600">
                   <CheckCircle size={16} className="text-green-500" />
@@ -354,7 +380,6 @@ export default function Landing() {
               </div>
             </div>
 
-            {/* Hero Image with Auto Carousel */}
             <div className="relative">
               <div className="aspect-[4/3] bg-gray-100 rounded-2xl overflow-hidden relative">
                 {heroImages.map((image, index) => (
@@ -368,7 +393,6 @@ export default function Landing() {
                   />
                 ))}
 
-                {/* Image Navigation Dots */}
                 <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
                   {heroImages.map((_, index) => (
                     <button
@@ -377,7 +401,7 @@ export default function Landing() {
                       className={`w-2 h-2 rounded-full transition-all ${
                         currentImage === index ? "bg-white w-6" : "bg-white/50"
                       }`}
-                    ></button>
+                    />
                   ))}
                 </div>
               </div>
@@ -386,7 +410,7 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* Stats Section with Animated Counters (unchanged) */}
+      {/* ===== STATS SECTION ===== */}
       <section ref={statsRef} className="py-20 px-6 bg-gray-50">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
@@ -406,8 +430,41 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* ===== FEATURES SECTION WITH ID ===== */}
-      <section id="features" className="py-20 px-6">
+      {/* ===== NEW: WHY LEGACYSPHERE ===== */}
+      <section className="py-20 px-6 bg-white">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900">
+              Why LegacySphere
+            </h2>
+            <p className="text-gray-500 mt-4 max-w-md mx-auto">
+              More than a network – a community built for lasting impact.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            {valueProps.map((item, index) => (
+              <div key={index} className="text-center group">
+                <div className="w-14 h-14 bg-gray-50 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:bg-gray-900 transition-colors duration-300">
+                  <item.icon
+                    size={28}
+                    className="text-gray-700 group-hover:text-white transition-colors duration-300"
+                  />
+                </div>
+                <h3 className="text-lg font-semibold text-gray-900 mb-1">
+                  {item.title}
+                </h3>
+                <p className="text-sm text-gray-500 max-w-xs mx-auto">
+                  {item.description}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ===== FEATURES SECTION ===== */}
+      <section id="features" className="py-20 px-6 bg-gray-50">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900">
@@ -443,25 +500,23 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* Testimonials Carousel (unchanged) */}
-      <section className="relative py-20 px-6 bg-gray-50 overflow-hidden">
-        {/* Background Video */}
+      {/* ===== TESTIMONIALS CAROUSEL ===== */}
+      <section className="relative py-20 px-6 overflow-hidden">
         <div className="absolute inset-0 z-0">
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            className="w-full h-full object-cover"
-            src="https://youtu.be/8LSt8_11wbQ"
+          <div
+            className="w-full h-full bg-cover bg-center transition-transform duration-[12000ms] ease-out will-change-transform animate-ken-burns"
+            style={{
+              backgroundImage:
+                'url("https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1600&q=80")',
+            }}
           />
-          <div className="absolute inset-0 bg-black/40" />
+          <div className="absolute inset-0 bg-gradient-to-br from-black/50 via-black/30 to-black/40" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_30%,rgba(0,0,0,0.3)_100%)]" />
         </div>
 
-        {/* Content - keep it above the video */}
         <div className="relative z-10 max-w-4xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold text-white">
+            <h2 className="text-3xl sm:text-4xl font-bold text-white drop-shadow-lg">
               What our community says
             </h2>
           </div>
@@ -474,22 +529,24 @@ export default function Landing() {
               >
                 {testimonials.map((testimonial, index) => (
                   <div key={index} className="w-full flex-shrink-0 px-4">
-                    <div className="bg-white/90 backdrop-blur-sm border border-white/20 rounded-2xl p-8 md:p-12">
-                      <Quote size={32} className="text-gray-200 mb-6" />
-                      <p className="text-xl text-gray-700 leading-relaxed mb-8">
+                    <div className="bg-white/20 backdrop-blur-xl border border-white/30 rounded-2xl p-8 md:p-12 shadow-2xl shadow-black/20 hover:shadow-black/30 transition-shadow duration-300 relative">
+                      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-0.5 bg-gradient-to-r from-transparent via-white/50 to-transparent" />
+
+                      <Quote size={32} className="text-white/60 mb-6" />
+                      <p className="text-xl text-white leading-relaxed mb-8 drop-shadow-md">
                         "{testimonial.quote}"
                       </p>
                       <div className="flex items-center gap-4">
                         <img
                           src={testimonial.image}
                           alt={testimonial.name}
-                          className="w-12 h-12 rounded-full object-cover"
+                          className="w-12 h-12 rounded-full object-cover ring-2 ring-white/30"
                         />
                         <div>
-                          <div className="font-semibold text-gray-900">
+                          <div className="font-semibold text-white drop-shadow-md">
                             {testimonial.name}
                           </div>
-                          <div className="text-sm text-gray-500">
+                          <div className="text-sm text-white/80 drop-shadow-sm">
                             {testimonial.role}, {testimonial.company} •{" "}
                             {testimonial.university}
                           </div>
@@ -501,37 +558,35 @@ export default function Landing() {
               </div>
             </div>
 
-            {/* Navigation Buttons */}
             <button
               onClick={prevSlide}
-              className="absolute top-1/2 -left-4 -translate-y-1/2 w-10 h-10 bg-white border border-gray-200 rounded-full flex items-center justify-center hover:bg-gray-50 transition-colors shadow-sm z-20"
+              className="absolute top-1/2 -left-4 -translate-y-1/2 w-10 h-10 bg-white/20 backdrop-blur-md border border-white/30 rounded-full flex items-center justify-center hover:bg-white/40 transition-colors shadow-lg z-20"
             >
-              <ChevronLeft size={20} className="text-gray-600" />
+              <ChevronLeft size={20} className="text-white" />
             </button>
             <button
               onClick={nextSlide}
-              className="absolute top-1/2 -right-4 -translate-y-1/2 w-10 h-10 bg-white border border-gray-200 rounded-full flex items-center justify-center hover:bg-gray-50 transition-colors shadow-sm z-20"
+              className="absolute top-1/2 -right-4 -translate-y-1/2 w-10 h-10 bg-white/20 backdrop-blur-md border border-white/30 rounded-full flex items-center justify-center hover:bg-white/40 transition-colors shadow-lg z-20"
             >
-              <ChevronRight size={20} className="text-gray-600" />
+              <ChevronRight size={20} className="text-white" />
             </button>
 
-            {/* Dots */}
             <div className="flex justify-center gap-2 mt-8">
               {testimonials.map((_, index) => (
                 <button
                   key={index}
                   onClick={() => setCurrentSlide(index)}
                   className={`w-2 h-2 rounded-full transition-all ${
-                    currentSlide === index ? "bg-white w-6" : "bg-white/50"
+                    currentSlide === index ? "bg-white w-6" : "bg-white/40"
                   }`}
-                ></button>
+                />
               ))}
             </div>
           </div>
         </div>
       </section>
 
-      {/* CTA Section (unchanged) */}
+      {/* ===== CTA SECTION ===== */}
       <section className="py-20 px-6">
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
@@ -553,7 +608,7 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* Footer (unchanged) */}
+      {/* ===== FOOTER ===== */}
       <footer className="border-t border-gray-100 py-8 px-6">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
           <div className="flex items-center gap-2 text-gray-500 text-sm">
